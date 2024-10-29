@@ -18,15 +18,16 @@ import java.util.List;
 @AllArgsConstructor
 public class Experience {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String postion;
-    private String reason ;
-    private String company_name ;
-    private LocalDate start_date ;
-    private LocalDate end_date ;
+    private String reason;
+    private String company_name;
+    private LocalDate start_date;
+    private LocalDate end_date;
 
 
-    @ManyToOne( cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_details_id")
     private user_details user_details;
 

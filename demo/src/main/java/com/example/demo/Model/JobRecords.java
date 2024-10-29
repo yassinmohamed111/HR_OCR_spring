@@ -15,6 +15,7 @@ public class JobRecords {
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String job_status;
     private LocalDate date ;
@@ -26,7 +27,7 @@ public class JobRecords {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private user user;
+    private Users user;
 
     @ManyToOne
     @JoinColumn(name = "job_id")

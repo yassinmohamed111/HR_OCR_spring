@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -13,12 +12,14 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class user {
+public class Users {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String email ;
     private String password ;
+    private String role;
 
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -26,9 +27,7 @@ public class user {
     private user_details user_details ;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "role_id")
-    private role role ;
+
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<JobRecords> jobRecords;
