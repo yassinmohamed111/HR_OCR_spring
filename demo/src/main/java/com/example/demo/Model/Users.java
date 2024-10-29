@@ -1,5 +1,8 @@
 package com.example.demo.Model;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,11 +16,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Users {
+    @Valid
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
+    @NotBlank(message = "Email cannot be blank")
+    @Pattern(regexp = "^[\\w.%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$", message = "Invalid email format")
     private String email ;
+    @NotBlank(message = "Password cannot be blank")
     private String password ;
     private String role;
 

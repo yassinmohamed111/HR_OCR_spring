@@ -7,6 +7,7 @@ import com.example.demo.Model.user_details;
 import com.example.demo.Service.UserDetailsService;
 import com.example.demo.repository.UserDetailsRepo;
 import com.example.demo.repository.UserRepo;
+import jakarta.transaction.Transactional;
 import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ public class UserDetailsServiceimpl implements UserDetailsService {
     }
 
 
+    @Transactional
     @Override
     public void createUserDetails(UserDetailsRequestDTO userDetailsRequestDTO) {
         user_details userDetails  = mapper.mapperToEntity(userDetailsRequestDTO);

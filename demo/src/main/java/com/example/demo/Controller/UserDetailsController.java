@@ -2,6 +2,7 @@ package com.example.demo.Controller;
 
 import com.example.demo.DTO.UserDetailsRequestDTO;
 import com.example.demo.Service.UserDetailsService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ public class UserDetailsController {
     }
 
     @PostMapping
-    public String createUserDetails (@RequestBody UserDetailsRequestDTO userDetailsRequestDTO) {
+    public String createUserDetails (@Valid  @RequestBody UserDetailsRequestDTO userDetailsRequestDTO) {
         userDetailsService.createUserDetails(userDetailsRequestDTO);
         return "User Details Created";
     }

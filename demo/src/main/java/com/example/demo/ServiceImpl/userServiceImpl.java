@@ -6,6 +6,7 @@ import com.example.demo.Mapper.userMapper;
 import com.example.demo.Model.Users;
 import com.example.demo.Service.UserService;
 import com.example.demo.repository.UserRepo;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,6 +20,8 @@ public class userServiceImpl implements UserService {
         this.userRepo = userRepo;
         this.adminMapper = adminMapper;
     }
+
+    @Transactional
     @Override
     public void createUser(UserRequestDTO userRequestDTO) {
         Users Users = userMapper.mapperToEntity(userRequestDTO);
