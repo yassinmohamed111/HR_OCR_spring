@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -19,5 +21,7 @@ public class UserDetailsRequestDTO {
     private String SSN ;
     private String address ;
     private String martial_status ;
+    private List<EducationDto> educations ;
+    private List<ExperienceDto> experiences ;
 
 }
