@@ -27,10 +27,6 @@ public class JobRecords {
         this.date = LocalDate.now();
     }
 
-
-
-
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private user user;
