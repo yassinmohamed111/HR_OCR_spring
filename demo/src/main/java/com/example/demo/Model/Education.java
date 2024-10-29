@@ -1,7 +1,5 @@
 package com.example.demo.Model;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,8 +24,9 @@ public class Education {
     private String major ;
     private LocalDate date;
 
-    @ManyToMany(mappedBy = "educations")
-    private List<user_details> user_details = new ArrayList<>();
+    @ManyToOne( cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_details_id")
+    private user_details user_details;
 
 
 }

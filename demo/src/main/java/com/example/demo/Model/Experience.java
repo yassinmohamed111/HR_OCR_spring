@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.catalina.User;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,8 +26,9 @@ public class Experience {
     private LocalDate end_date ;
 
 
-    @ManyToMany(mappedBy = "experiences")
-    private List<user_details> user_details = new ArrayList<>();
+    @ManyToOne( cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_details_id")
+    private user_details user_details;
 
 
 }

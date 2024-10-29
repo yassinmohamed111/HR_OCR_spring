@@ -31,24 +31,13 @@ public class user_details {
     @OneToOne(mappedBy = "user_details")
     private user user ;
 
+    @OneToMany(mappedBy = "user_details"  , cascade = {CascadeType.DETACH , CascadeType.MERGE , CascadeType.PERSIST , CascadeType.REFRESH})
+    private List<Education> educations = new ArrayList<>();
 
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_workExperience",
-            joinColumns = @JoinColumn(name = "user_details_id"),
-            inverseJoinColumns = @JoinColumn(name = "experience_id")
-    )
+    @OneToMany(mappedBy = "user_details"  , cascade = {CascadeType.DETACH , CascadeType.MERGE , CascadeType.PERSIST , CascadeType.REFRESH})
     private List<Experience> experiences = new ArrayList<>();
 
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_education",
-            joinColumns = @JoinColumn(name = "user_details_id"),
-            inverseJoinColumns = @JoinColumn(name = "education_id")
-    )
-    private List<Education> educations = new ArrayList<>();
 
 
 }

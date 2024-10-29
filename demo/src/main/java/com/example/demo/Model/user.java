@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -16,8 +17,9 @@ public class user {
     @Id
     private Long id;
 
-    private String password ;
     private String email ;
+    private String password ;
+
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_details_id")
@@ -30,5 +32,7 @@ public class user {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<JobRecords> jobRecords;
+
+
 
 }
