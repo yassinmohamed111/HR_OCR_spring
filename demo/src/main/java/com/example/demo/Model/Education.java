@@ -1,6 +1,7 @@
-package com.example.demo.Entity;
-
-import jakarta.persistence.*;
+package com.example.demo.Model;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,17 +16,17 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Experience {
+public class Education {
     @Id
     private Long id;
-    private String postion;
-    private String reason ;
-    private String company_name ;
-    private LocalDate start_date ;
-    private LocalDate end_date ;
 
+    private String university;
+    private String degree ;
+    private String grade ;
+    private String major ;
+    private LocalDate date;
 
-    @ManyToMany(mappedBy = "experiences")
+    @ManyToMany(mappedBy = "educations")
     private List<user_details> user_details = new ArrayList<>();
 
 
