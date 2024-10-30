@@ -16,7 +16,7 @@ public class JobController {
     public JobController(JobService jobService) {
         this.jobService = jobService;
     }
-    @PostMapping("")
+    @PostMapping
     public String CreateJob(jobs job){
         jobService.createJob(job);
         return "Job created";
