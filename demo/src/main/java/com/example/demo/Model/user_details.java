@@ -1,4 +1,5 @@
 package com.example.demo.Model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -44,6 +45,7 @@ public class user_details {
     @NotBlank(message = "marital status cannot be blank")
     private String martial_status ;
     //user_details
+    @JsonBackReference
     @OneToOne(mappedBy = "user_details")
     private Users Users;
 

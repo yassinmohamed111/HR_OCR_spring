@@ -1,4 +1,5 @@
 package com.example.demo.Model;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +22,7 @@ public class jobs {
     private String description ;
     private String requirements ;
     private String recruiter ;
-
+    @JsonManagedReference
     @OneToMany(mappedBy = "job", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<JobRecords> jobRecords ;
 

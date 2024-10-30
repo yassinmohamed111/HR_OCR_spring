@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,11 +25,11 @@ public class JobRecords {
         this.job_status = "Pending";
         this.date = LocalDate.now();
     }
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "job_id")
     private jobs job;

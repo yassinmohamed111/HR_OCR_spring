@@ -1,4 +1,5 @@
 package com.example.demo.Model;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -36,7 +37,7 @@ public class Users {
 
 
 
-
+    @JsonManagedReference
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<JobRecords> jobRecords;
 
