@@ -1,12 +1,10 @@
 package com.example.demo.Controller;
 
 import com.example.demo.DTO.JobRecordsRequestDto;
+import com.example.demo.DTO.updateStatusDTO;
 import com.example.demo.Service.JobRecordsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/jobRecords")
@@ -18,4 +16,11 @@ public class JobRecordsController {
         jobRecordsService.ApplyJob(jobRecordsRequestDto);
         return "job applied successfully";
     }
+
+    @PutMapping
+    public String UpdateJob(@RequestBody updateStatusDTO updateStatusDTO) {
+        jobRecordsService.editStatus(updateStatusDTO);
+        return "job status updated successfully";
+    }
+
 }
