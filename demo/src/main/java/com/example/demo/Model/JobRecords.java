@@ -23,6 +23,7 @@ public class JobRecords {
     public JobRecords() {
 
         this.date = LocalDate.now();
+        this.job_status = "pending";
     }
 
     @ManyToOne
