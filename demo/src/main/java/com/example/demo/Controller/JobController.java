@@ -5,6 +5,8 @@ import com.example.demo.Service.JobService;
 import com.example.demo.ServiceImpl.JobServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/job")
 public class JobController {
@@ -13,9 +15,22 @@ public class JobController {
     public JobController(JobService jobService) {
         this.jobService = jobService;
     }
-    @PostMapping
-    public String CreateJob( @RequestBody jobs job){
+
+    @GetMapping()
+    public List<jobs> getAllJobs(){
+        return jobService.getAllJob();
+    }
+
+    @PostMapping("")
+    public String createJob(@RequestBody jobs job){
         jobService.createJob(job);
         return "Job created";
     }
+
+//    @DeleteMapping("{id}")
+//    public String deleteJob(@PathVariable long id){
+//        jobService.deleteJobById(id);
+//        return "Job deleted";
+//    }
+
 }
