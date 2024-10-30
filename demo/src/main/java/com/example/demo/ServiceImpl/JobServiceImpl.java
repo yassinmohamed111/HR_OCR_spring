@@ -6,6 +6,8 @@ import com.example.demo.repository.JobRepo;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 @Service
 public class JobServiceImpl implements JobService {
 
@@ -19,4 +21,11 @@ public class JobServiceImpl implements JobService {
     public void createJob( @RequestBody jobs job) {
         jobRepo.save(job);
     }
+
+    @Override
+    public List<jobs> getAllJob() {
+        return jobRepo.findAll();
+    }
+
+
 }

@@ -21,9 +21,8 @@ public class JobRecords {
     private LocalDate date ;
 
     public JobRecords() {
-
+        this.job_status = "Pending";
         this.date = LocalDate.now();
-        this.job_status = "pending";
     }
 
     @ManyToOne
