@@ -5,6 +5,8 @@ import com.example.demo.Service.JobService;
 import com.example.demo.repository.JobRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class JobServiceImpl implements JobService {
 
@@ -18,4 +20,11 @@ public class JobServiceImpl implements JobService {
     public void createJob(jobs job) {
         jobRepo.save(job);
     }
+
+    @Override
+    public List<jobs> getAllJob() {
+        return jobRepo.findAll();
+    }
+
+
 }
