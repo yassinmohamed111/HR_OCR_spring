@@ -1,6 +1,7 @@
 package com.example.demo.ServiceImpl;
 
 import com.example.demo.DTO.JobRecordsRequestDto;
+import com.example.demo.DTO.JobrecordResponseDTO;
 import com.example.demo.DTO.updateStatusDTO;
 import com.example.demo.Mapper.JobRecordMapper;
 import com.example.demo.Model.JobRecords;
@@ -8,6 +9,8 @@ import com.example.demo.Service.JobRecordsService;
 import com.example.demo.repository.JobRecordsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class JobRecordsServiceImpl implements JobRecordsService {
@@ -29,5 +32,10 @@ public class JobRecordsServiceImpl implements JobRecordsService {
         jobRecords.setJob_status(u.getStatus());
         JobRecordsRepo.save(jobRecords);
 
+    }
+
+    @Override
+    public List<JobRecords> retriveAllJobRecords() {
+        return JobRecordsRepo.findAll();
     }
 }
