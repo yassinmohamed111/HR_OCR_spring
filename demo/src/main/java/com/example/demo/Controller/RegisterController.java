@@ -1,13 +1,13 @@
 package com.example.demo.Controller;
 
 import com.example.demo.DTO.UserRequestDTO;
+import com.example.demo.Model.Users;
 import com.example.demo.Service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/register")
@@ -28,4 +28,11 @@ public class RegisterController {
         userService.createUser(userRequestDTO);
         return ResponseEntity.ok("User created successfully");
     }
+
+    @GetMapping
+    public List<Users> retriveAllusers()
+    {
+        return userService.retriveAllUsers();
+    }
+
 }

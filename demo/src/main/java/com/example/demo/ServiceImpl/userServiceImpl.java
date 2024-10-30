@@ -9,6 +9,8 @@ import com.example.demo.repository.UserRepo;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class userServiceImpl implements UserService {
     UserRepo userRepo;
@@ -33,5 +35,10 @@ public class userServiceImpl implements UserService {
 
         Users Users = adminMapper.mapperTOentity(userRequestDTO);
         userRepo.save(Users);
+    }
+
+    @Override
+    public List<Users> retriveAllUsers() {
+        return userRepo.findAll();
     }
 }
