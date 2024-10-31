@@ -22,7 +22,8 @@ public class jobs {
     private String description ;
     private String requirements ;
     private String recruiter ;
-    @JsonManagedReference
+
+    @JsonManagedReference("jobsRecordReference")
     @OneToMany(mappedBy = "job", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<JobRecords> jobRecords ;
 

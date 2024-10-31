@@ -1,9 +1,12 @@
 package com.example.demo.Controller;
 
 import com.example.demo.DTO.UserRequestDTO;
+import com.example.demo.DTO.UserResponseDetailsDTO;
 import com.example.demo.Model.Users;
+import com.example.demo.Service.UserDetailsService;
 import com.example.demo.Service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +15,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/register")
 public class RegisterController {
+    @Autowired
     UserService userService;
-    public RegisterController(UserService userService) {
-        this.userService = userService;
-    }
+    @Autowired
+    UserDetailsService userDetailsService;
+
+
 
     @PostMapping("/admin")
     public String createAdmin(@Valid @RequestBody UserRequestDTO userRequestDTO) {
@@ -30,9 +35,9 @@ public class RegisterController {
     }
 
     @GetMapping
-    public List<Users> retriveAllusers()
+    public List<UserResponseDetailsDTO> retriveAllusers()
     {
-        return userService.retriveAllUsers();
+        return userDetailsService.retrieveAllUsers();
     }
 
 }

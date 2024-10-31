@@ -3,8 +3,10 @@ package com.example.demo.Mapper;
 import com.example.demo.DTO.EducationDto;
 import com.example.demo.DTO.ExperienceDto;
 import com.example.demo.DTO.UserDetailsRequestDTO;
+import com.example.demo.DTO.UserResponseDetailsDTO;
 import com.example.demo.Model.Education;
 import com.example.demo.Model.Experience;
+import com.example.demo.Model.Users;
 import com.example.demo.Model.user_details;
 import org.springframework.stereotype.Component;
 
@@ -57,5 +59,22 @@ public class userDetailsMapper {
         user_details.setEducations(educationList);
         user_details.setExperiences(experienceList);
         return user_details;
+    }
+
+    public UserResponseDetailsDTO entityToDTO(user_details user_details) {
+        UserResponseDetailsDTO userResponseDetailsDTO = new UserResponseDetailsDTO();
+        userResponseDetailsDTO.setId(user_details.getUsers().getId());
+        userResponseDetailsDTO.setEmail(user_details.getUsers().getEmail());
+        userResponseDetailsDTO.setAddress(user_details.getAddress());
+        userResponseDetailsDTO.setDob(user_details.getDob());
+        userResponseDetailsDTO.setGender(user_details.getGender());
+        userResponseDetailsDTO.setMartial_status(user_details.getMartial_status());
+        userResponseDetailsDTO.setPhone(user_details.getPhone());
+        userResponseDetailsDTO.setName(user_details.getName());
+        userResponseDetailsDTO.setPob(user_details.getPob());
+        userResponseDetailsDTO.setMilitary_status(user_details.getMilitary_status());
+        userResponseDetailsDTO.setSSN(user_details.getSSN());
+        userResponseDetailsDTO.setRole(user_details.getUsers().getRole());
+        return userResponseDetailsDTO;
     }
 }

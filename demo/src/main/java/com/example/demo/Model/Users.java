@@ -1,4 +1,5 @@
 package com.example.demo.Model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
@@ -26,6 +27,7 @@ public class Users {
     @NotBlank(message = "Email cannot be blank")
     @Pattern(regexp = "^[\\w.%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$", message = "Invalid email format")
     private String email ;
+
     @NotBlank(message = "Password cannot be blank")
     private String password ;
     private String role;
@@ -33,11 +35,11 @@ public class Users {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_details_id")
+    @JsonManagedReference("userDetailsReference")
     private user_details user_details ;
 
 
-
-    @JsonManagedReference
+    @JsonManagedReference("userJobsReference")
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<JobRecords> jobRecords;
 

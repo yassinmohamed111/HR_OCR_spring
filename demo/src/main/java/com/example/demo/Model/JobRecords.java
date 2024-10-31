@@ -25,11 +25,12 @@ public class JobRecords {
         this.job_status = "Pending";
         this.date = LocalDate.now();
     }
-    @JsonBackReference
+    @JsonBackReference("userJobsReference")
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;
-    @JsonBackReference
+
+    @JsonBackReference("jobsRecordReference")
     @ManyToOne
     @JoinColumn(name = "job_id")
     private jobs job;

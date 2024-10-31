@@ -1,6 +1,7 @@
 package com.example.demo.Mapper;
 
 import com.example.demo.DTO.UserRequestDTO;
+import com.example.demo.DTO.UserResponseDetailsDTO;
 import com.example.demo.Model.Users;
 import org.springframework.stereotype.Component;
 
@@ -16,4 +17,7 @@ public class userMapper {
 
 
     }
+
+
+
 }

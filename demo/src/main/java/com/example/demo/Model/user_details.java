@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -44,15 +45,20 @@ public class user_details {
     private String address ;
     @NotBlank(message = "marital status cannot be blank")
     private String martial_status ;
+
     //user_details
-    @JsonBackReference
+    @JsonBackReference("userDetailsReference")
     @OneToOne(mappedBy = "user_details")
     private Users Users;
 
-    @OneToMany(mappedBy = "user_details"  , cascade = {CascadeType.DETACH , CascadeType.MERGE , CascadeType.PERSIST , CascadeType.REFRESH})
+    @OneToMany(mappedBy = "user_details"  , cascade = {CascadeType.DETACH , CascadeType.MERGE ,
+            CascadeType.PERSIST , CascadeType.REFRESH})
+    @JsonManagedReference("userDetailsEduReference")
     private List<Education> educations = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user_details"  , cascade = {CascadeType.DETACH , CascadeType.MERGE , CascadeType.PERSIST , CascadeType.REFRESH})
+    @OneToMany(mappedBy = "user_details"  , cascade = {CascadeType.DETACH , CascadeType.MERGE ,
+            CascadeType.PERSIST , CascadeType.REFRESH})
+    @JsonManagedReference("userDetailsExpReference")
     private List<Experience> experiences = new ArrayList<>();
 
 

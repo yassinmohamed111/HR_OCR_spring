@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -33,6 +34,7 @@ public class Experience {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_details_id")
+    @JsonBackReference("userDetailsExpReference")
     private user_details user_details;
 
 
