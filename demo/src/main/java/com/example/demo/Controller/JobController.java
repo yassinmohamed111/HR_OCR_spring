@@ -17,7 +17,7 @@ public class JobController {
     public JobController(JobService jobService) {
         this.jobService = jobService;
     }
-
+//
     @GetMapping()
     public List<jobs> getAllJobs(){
         return jobService.getAllJob();
@@ -27,7 +27,7 @@ public class JobController {
     public Optional<jobs> getJobById(@PathVariable long id){
         return jobService.getJobById(id);
     }
-
+//
     @PostMapping
     public String createJob(@RequestBody jobs job){
         jobService.createJob(job);
@@ -42,7 +42,7 @@ public class JobController {
         return "Jobs created";
     }
 // commented functions require fixing
-
+//
 //    @PostMapping("upsert/{id}")
 //    public void addUpdateJob(@PathVariable Long id, @RequestBody jobs job){
 //        jobService.addUpdateJob(id, job.getTitle(), job.getDescription(), job.getRecruiter());
