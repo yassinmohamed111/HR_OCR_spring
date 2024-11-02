@@ -1,6 +1,6 @@
 package com.example.demo.repository;
 
-import com.example.demo.Model.jobs;
+import com.example.demo.models.jobs;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
