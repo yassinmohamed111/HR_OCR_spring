@@ -43,7 +43,6 @@ public class user_details {
     private String SSN ;
     @NotBlank(message = "address cannot be blank")
     private String address ;
-    @NotBlank(message = "marital status cannot be blank")
     private String martial_status ;
 
     //user_details
