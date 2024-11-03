@@ -1,5 +1,6 @@
 package com.example.demo.mapper;
 
+import com.example.demo.dto.JobRecordDto;
 import com.example.demo.dto.JobRecordsRequestDto;
 import com.example.demo.models.JobRecords;
 import com.example.demo.repository.JobRepo;
@@ -9,15 +10,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class JobRecordMapper {
-    @Autowired
-    JobRepo jobRepo;
-    @Autowired
-    UserRepo userRepo;
-    public  JobRecords ToEntityJobRecords(JobRecordsRequestDto jobRecordsDto){
-        JobRecords jobRecords = new JobRecords();
-
-        jobRecords.setJob(jobRepo.findById(jobRecordsDto.getJobId()).get());
-        jobRecords.setUser(userRepo.findByEmail(jobRecordsDto.getUserEmail()));
-        return jobRecords;
+    public JobRecords mapper(JobRecordDto source, JobRecords target) {
+        target.setJob_status(source.getJob_status());
+        target.setDate(source.getDate());
+        return target;
     }
 }

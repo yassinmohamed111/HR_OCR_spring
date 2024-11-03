@@ -11,10 +11,10 @@ import lombok.NonNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JobDto {
-    @NotNull
+//    @NotNull
     private Long id;
-    @NotNull
-    @NotBlank
+//    @NotNull
+//    @NotBlank
     private String title;
     private String description;
     private String requirements;

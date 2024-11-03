@@ -1,40 +1,59 @@
 package com.example.demo.serviceImpl;
 
-import com.example.demo.dto.JobRecordsRequestDto;
+import com.example.demo.dto.JobRecordDto;
 import com.example.demo.dto.UpdateStatusDTO;
 import com.example.demo.mapper.JobRecordMapper;
 import com.example.demo.models.JobRecords;
-import com.example.demo.services.JobRecordsService;
 import com.example.demo.repository.JobRecordsRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.services.JobRecordsService;
+import com.example.demo.utils.DTOConverter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class JobRecordsServiceImpl implements JobRecordsService {
-    @Autowired
-    JobRecordsRepo JobRecordsRepo;
-    @Autowired
-    JobRecordMapper JobRecordMapper;
+    final private JobRecordsRepo jobRecordsRepo;
+    final private JobRecordMapper JobRecordMapper;
+
+
     @Override
-    public void ApplyJob(JobRecordsRequestDto jobRecordsRequestDto) {
-        JobRecords JobRecords = JobRecordMapper.ToEntityJobRecords(jobRecordsRequestDto);
-        JobRecordsRepo.save(JobRecords);
+    public List<JobRecordDto> getAllJobRecords() {
+        return jobRecordsRepo.findAll().stream().map(e -> DTOConverter.convertToEntity(e, JobRecordDto.class)).toList();
+    }
+
+    @Override
+    public JobRecordDto getJobRecordById(long id) throws ChangeSetPersister.NotFoundException {
+        Optional<JobRecords> jobRecords = jobRecordsRepo.findById(id);
+        if (jobRecords.isPresent()) {
+            return DTOConverter.convertToEntity(jobRecords.get(), JobRecordDto.class);
+        }
+        throw new ChangeSetPersister.NotFoundException();
+    }
+
+    @Override
+    public JobRecordDto createJobRecord(@RequestBody JobRecordDto jobRecord) {
+        return DTOConverter.convertToEntity(jobRecordsRepo.save(DTOConverter.convertToEntity(jobRecord, JobRecords.class)), JobRecordDto.class);
+    }
+
+    @Override
+    public void updateJobRecord(JobRecordDto jobRecord) {
+
     }
 
     @Override
     public void editStatus(UpdateStatusDTO u) {
         System.out.println(u.getStatus());
         System.out.println(u.getJobRecordId());
-        JobRecords jobRecords = JobRecordsRepo.findById(u.getJobRecordId()).orElseThrow();
+
+        JobRecords jobRecords = jobRecordsRepo.findById(u.getJobRecordId()).orElseThrow();
         jobRecords.setJob_status(u.getStatus());
-        JobRecordsRepo.save(jobRecords);
+        jobRecordsRepo.save(jobRecords);
 
-    }
-
-    @Override
-    public List<JobRecords> retriveAllJobRecords() {
-        return JobRecordsRepo.findAll();
     }
 }
