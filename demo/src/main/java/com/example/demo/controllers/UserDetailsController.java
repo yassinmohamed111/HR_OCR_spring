@@ -3,12 +3,11 @@ package com.example.demo.controllers;
 import com.example.demo.dto.UserDetailsRequestDTO;
 import com.example.demo.services.UserDetailsService;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/userDetails")
 public class UserDetailsController {
 
@@ -18,9 +17,9 @@ public class UserDetailsController {
     }
 
     @PostMapping
-    public String createUserDetails (@Valid  @RequestBody UserDetailsRequestDTO userDetailsRequestDTO) {
+    public ResponseEntity<Void> createUserDetails(@Valid @RequestBody UserDetailsRequestDTO userDetailsRequestDTO) {
         userDetailsService.createUserDetails(userDetailsRequestDTO);
-        return "User Details Created";
+        return ResponseEntity.ok().build();
     }
 
 
