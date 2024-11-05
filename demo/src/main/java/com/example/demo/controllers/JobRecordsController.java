@@ -28,11 +28,11 @@ public class JobRecordsController {
         JobRecordDto jobRecordDto = jobRecordsService.getJobRecordById(id);
         return ResponseEntity.ok().body(jobRecordDto);
     }
-
-    @PostMapping()
-    public ResponseEntity<?> createJobRecord(@RequestBody JobRecordDto jobRecordDto) {
-        return ResponseEntity.ok().body(jobRecordsService.createJobRecord(jobRecordDto));
-    }
+//
+//    @PostMapping()
+//    public ResponseEntity<?> createJobRecord(@RequestBody JobRecordDto jobRecordDto) {
+//        return ResponseEntity.ok().body(jobRecordsService.createJobRecord(jobRecordDto));
+//    }
 
     @PutMapping
     public String UpdateJob(@RequestBody UpdateStatusDTO updateStatusDTO) {
