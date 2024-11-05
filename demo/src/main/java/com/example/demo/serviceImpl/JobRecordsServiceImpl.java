@@ -2,9 +2,14 @@ package com.example.demo.serviceImpl;
 
 import com.example.demo.dto.JobRecordDto;
 import com.example.demo.dto.UpdateStatusDTO;
+import com.example.demo.dto.UserJobLinkDto;
 import com.example.demo.mapper.JobRecordMapper;
 import com.example.demo.models.JobRecords;
+import com.example.demo.models.Users;
+import com.example.demo.models.jobs;
 import com.example.demo.repository.JobRecordsRepo;
+import com.example.demo.repository.JobRepo;
+import com.example.demo.repository.UserRepo;
 import com.example.demo.services.JobRecordsService;
 import com.example.demo.utils.DTOConverter;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +25,8 @@ import java.util.Optional;
 public class JobRecordsServiceImpl implements JobRecordsService {
     final private JobRecordsRepo jobRecordsRepo;
     final private JobRecordMapper JobRecordMapper;
+    private final UserRepo userRepo;
+    private final JobRepo jobRepo;
 
 
     @Override
@@ -55,5 +62,16 @@ public class JobRecordsServiceImpl implements JobRecordsService {
         jobRecords.setJob_status(u.getStatus());
         jobRecordsRepo.save(jobRecords);
 
+    }
+
+
+    @Override
+    public void createJobRecord(@RequestBody UserJobLinkDto userJobLinkDto) {
+        Users user = userRepo.findByEmail(userJobLinkDto.getUserEmail());
+        jobs jobs = jobRepo.findById(userJobLinkDto.getJobId()).get();
+        JobRecords jobRecords = new JobRecords();
+        jobRecords.setUser(user);
+        jobRecords.setJob(jobs);
+        jobRecordsRepo.save(jobRecords);
     }
 }

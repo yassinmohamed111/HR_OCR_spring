@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.dto.JobRecordDto;
 import com.example.demo.dto.UpdateStatusDTO;
+import com.example.demo.dto.UserJobLinkDto;
 import com.example.demo.services.JobRecordsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;
@@ -37,5 +38,11 @@ public class JobRecordsController {
     public String UpdateJob(@RequestBody UpdateStatusDTO updateStatusDTO) {
         jobRecordsService.editStatus(updateStatusDTO);
         return "job status updated successfully";
+    }
+
+    @PostMapping()
+    public ResponseEntity<?> createJobRecord(@RequestBody UserJobLinkDto userJobLinkDto) {
+        jobRecordsService.createJobRecord(userJobLinkDto);
+        return ResponseEntity.ok().build();
     }
 }
