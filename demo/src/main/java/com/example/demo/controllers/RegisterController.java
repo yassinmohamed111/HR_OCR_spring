@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.dto.ChangePasswordDTO;
 import com.example.demo.dto.LoginResponseDTO;
 import com.example.demo.dto.UserRequestDTO;
 import com.example.demo.dto.UserResponseDetailsDTO;
@@ -82,6 +83,20 @@ public class RegisterController {
             return ResponseEntity.ok(response); // Return as JSON
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("failure");
+        }
+    }
+
+    @PostMapping("/changePassword")
+    public ResponseEntity<String> changePassword(@RequestBody ChangePasswordDTO changePasswordDTO) {
+        try {
+            userService.changePassword(changePasswordDTO);
+            return ResponseEntity.ok("Password updated successfully");
+        } catch (IllegalArgumentException e) {
+
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while updating the password");
         }
     }
 

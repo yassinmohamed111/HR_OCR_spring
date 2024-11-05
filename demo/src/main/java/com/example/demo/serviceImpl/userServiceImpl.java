@@ -1,5 +1,6 @@
 package com.example.demo.serviceImpl;
 
+import com.example.demo.dto.ChangePasswordDTO;
 import com.example.demo.dto.UserDetailsRequestDTO;
 import com.example.demo.dto.UserRequestDTO;
 import com.example.demo.dto.UserResponseDetailsDTO;
@@ -14,6 +15,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.View;
 
 @Service
 
@@ -26,6 +28,8 @@ public class userServiceImpl implements UserService {
     private UserDetailsRepo userDetailsRepo;
     @Autowired
     private com.example.demo.mapper.userDetailsMapper userDetailsMapper;
+    @Autowired
+    private View error;
 
     public userServiceImpl(userMapper userMapper, UserRepo userRepo, adminMapper adminMapper, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userMapper = userMapper;
@@ -57,6 +61,19 @@ public class userServiceImpl implements UserService {
         return userResponseDetailsDTO;
 
     }
+
+    @Override
+    public void changePassword(ChangePasswordDTO changePasswordDTO) {
+        Users user = userRepo.findById(changePasswordDTO.getUserid())
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        if (bCryptPasswordEncoder.matches(changePasswordDTO.getOldPassword(), user.getPassword())) {
+            user.setPassword(bCryptPasswordEncoder.encode(changePasswordDTO.getNewPassword()));
+            userRepo.save(user);
+        } else {
+            throw new IllegalArgumentException("Old password is incorrect");
+        }
+    }
+
 
 
 }

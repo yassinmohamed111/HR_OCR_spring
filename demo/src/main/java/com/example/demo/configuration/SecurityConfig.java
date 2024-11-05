@@ -47,7 +47,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf(customizer -> customizer.disable());
-        http.authorizeHttpRequests(requests -> requests.requestMatchers("api/register/user","/api/userDetails" , "api/register/login").permitAll()
+        http.authorizeHttpRequests(requests -> requests.requestMatchers("api/register/user","/api/userDetails" , "api/register/login" , "api/register/changePassword").permitAll()
                 .anyRequest().authenticated());
         http.httpBasic(Customizer.withDefaults());
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -61,4 +61,6 @@ public class SecurityConfig {
 
         return config.getAuthenticationManager();
     }
+
+
 }
